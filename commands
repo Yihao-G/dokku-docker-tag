@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -eo pipefail
+[[ $DOKKU_TRACE ]] && set -x
+
+if [[ "$1" == "help" ]]; then
+  cat<<help_content
+    docker tag, Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+help_content
+  exit 0
+fi
+
+case "$1 $2" in
+  "docker tag")
+    docker tag "${@:3}"
+    ;;
+
+  *)
+    exit "$DOKKU_NOT_IMPLEMENTED_EXIT"
+    ;;
+
+esac
